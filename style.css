@@ -1,0 +1,118 @@
+*{
+	margin:0;
+	padding:0;
+	font-family: 'Poppins', sans-serif;
+}
+
+:root {
+	--square-size: 150px;
+	--mark-size: calc(var(--square-size) * 0.9);
+}
+
+body {
+	background-color: #3275a8;
+	margin: 0;
+}
+
+.text-box{
+	width: 100%;
+	position: absolute;
+	text-align: center;
+	font-size: 50px;
+	color: #fff;
+}
+
+.board {
+	width: 100vw;
+	height: 100vh;
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	align-content: center;
+	justify-content: center;
+	justify-items: center;
+	align-items: center;
+}
+
+
+.square {
+	width: var(--square-size);
+	height: var(--square-size);
+	border: 2px solid white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	cursor: pointer;
+}
+
+.square:first-child, .square:nth-child(2), .square:nth-child(3) {
+	border-top: none;
+}
+
+.square:nth-child(3n + 1) {
+	border-left: none;
+}
+
+.square:nth-child(3n + 3) {
+	border-right: none;
+}
+
+.square:nth-child(7), .square:nth-child(8), .square:nth-child(9) {
+	border-bottom: none;
+}
+
+.board.x .square:not(.x):not(.o):hover::before,
+.board.x .square:not(.x):not(.o):hover::after,
+.board.o .square:not(.x):not(.o):hover::before {
+	opacity: 0.6;
+}
+
+.square.x::before, .square.x::after, 
+.board.x .square:not(.x):not(.o):hover::before, .board.x .square:not(.x):not(.o):hover::after {
+	content: '';
+	width: calc(var(--mark-size) * 0.15);
+	height: var(--mark-size);
+	position: absolute;
+	background-color: white;
+}
+
+.square.x::before, .board.x .square:not(.x):not(.o):hover::before {
+	transform: rotate(45deg);
+}
+
+.square.x::after, .board.x .square:not(.x):not(.o):hover::after {
+	transform: rotate(-45deg);
+}
+
+.square.o::before, .square.o::after,
+.board.o .square:not(.x):not(.o):hover::before, .board.o .square:not(.x):not(.o):hover::after {
+	content: '';
+	border-radius: 50%;
+	position: absolute;
+}
+
+.square.o::before, .board.o .square:not(.x):not(.o):hover::before {
+	width: calc(var(--mark-size) * 0.9);
+	height: calc(var(--mark-size) * 0.9);
+	background-color: white;
+}
+
+.square.o::after, .board.o .square:not(.x):not(.o):hover::after {
+	width: calc(var(--mark-size) * 0.65);
+	height: calc(var(--mark-size) * 0.65);
+	background-color: #3275a8;
+}
+
+.square.x, .square.o {
+	cursor: not-allowed;
+}
+
+
+.strikethrough {
+	background-color: white;
+	position: absolute;
+	height: 5px;
+	width: 50px;
+	top: 97;
+	left: 58;
+}}
