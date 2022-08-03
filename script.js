@@ -1,6 +1,9 @@
 const squares = document.querySelectorAll('[data-square]')
 const board = document.getElementById('board')
-const strikethrough = document.getElementById('strikethrough')
+const strike = document.querySelectorAll('[strike]')
+const winMessageScene = document.getElementById("winMessage")
+const winMessageText = document.querySelector('[winMessageText]')
+const winButton = document.getElementById('reset')
 let winningCombination
 
 const POSSIBLE_WINS = [
@@ -17,10 +20,11 @@ const POSSIBLE_WINS = [
 startGame()
 
 function startGame() {
-	xTurn = true
+	xTurn = false
 	squares.forEach(square => {
 		square.addEventListener('click', handleClick, {once: true})
 	})
+	winButton.addEventListener('click', resetGame)
 	setBoardHover()
 }
 
@@ -31,20 +35,73 @@ function handleClick(e) {
 
 	if(checkWin(currentClass)) {
 		console.log('win')
-
+		count = 0
 		switch(winningCombination) {
 			case POSSIBLE_WINS[0]:
-				strikethrough.top = 97;
-				strikethrough.left = 58;
-				strikethrough.width = 285;
-				strikethrough.show()
-				break;
+				console.log("winner 2")
+				strike[0].style.marginTop = '-16%'
+				strike[0].style.width = '450px'
+				strike[0].style.opacity = 1
+			break;
+			case POSSIBLE_WINS[1]:
+				strike[0].style.width = '450px'
+				strike[0].style.opacity = 1
+			break;
+			case POSSIBLE_WINS[2]:
+				strike[0].style.width = '450px'
+				strike[0].style.marginTop = '16%'
+				strike[0].style.opacity = 1
+			break;
+			case POSSIBLE_WINS[3]:
+				strike[0].style.transform = 'rotate(90deg)'
+				strike[0].style.width = '450px'
+				strike[0].style.marginLeft = '-16%'
+				strike[0].style.opacity = 1
+			break;
+			case POSSIBLE_WINS[4]:
+				strike[0].style.transform = 'rotate(90deg)'
+				strike[0].style.width = '450px'
+				strike[0].style.opacity = 1
+			break;
+			case POSSIBLE_WINS[5]:
+				strike[0].style.transform = 'rotate(90deg)'
+				strike[0].style.width = '450px'
+				strike[0].style.marginLeft = '16%'
+				strike[0].style.opacity = 1
+			break;
+			case POSSIBLE_WINS[6]:
+				strike[0].style.transform = 'rotate(45deg)'
+				strike[0].style.width = '640px'
+				strike[0].style.opacity = 1
+			break;
+			case POSSIBLE_WINS[7]:
+				strike[0].style.transform = 'rotate(-45deg)'
+				strike[0].style.width = '640px'
+				strike[0].style.opacity = 1
+			break;
 		}
-
+		squares.forEach(square => {
+			square.style.pointerEvents = 'none'
+		})
+		endGame(false)
+	} else if (checkDraw()) {
+		endGame(true)
 	}
 
 	swapTurn()
 	setBoardHover() 
+}
+
+
+function endGame(isDraw) {
+	if (isDraw) {
+		winMessageText.innerText = 'It\'s a Draw!'
+		winMessage.classList.add('show')
+	} else {
+		winMessageText.innerText = xTurn ? 'Crosses Wins!' : 'Noughts Wins!'
+		winMessage.classList.add('show')
+	}
+
 }
 
 
@@ -54,6 +111,12 @@ function placeMark(square, currentClass) {
 
 function swapTurn() {
 	xTurn = !xTurn
+}
+
+function checkDraw() {
+	return [...squares].every(square => {
+		return square.classList.contains('x') || square.classList.contains('o')
+	})
 }
 
 function setBoardHover() {
@@ -74,5 +137,8 @@ function checkWin(currentClass) {
 			return squares[index].classList.contains(currentClass)
 		}) 
 	})
+}
 
+function resetGame() {
+	location.reload()
 }
