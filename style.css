@@ -132,7 +132,7 @@ hr {
 	flex-direction: column;
 	font-size: 5rem;
 	opacity: 0;
-	transition: opacity 3s ease;
+	transition: opacity 5s ease;
 }
 
 .winMessage button {
