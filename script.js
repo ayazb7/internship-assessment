@@ -34,12 +34,10 @@ function handleClick(e) {
 	placeMark(square, currentClass)
 
 	if(checkWin(currentClass)) {
-		console.log('win')
 		count = 0
 		switch(winningCombination) {
 			case POSSIBLE_WINS[0]:
-				console.log("winner 2")
-				strike[0].style.marginTop = '-16%'
+				strike[0].style.marginTop = '-31vh'
 				strike[0].style.width = '450px'
 				strike[0].style.opacity = 1
 			break;
@@ -49,13 +47,13 @@ function handleClick(e) {
 			break;
 			case POSSIBLE_WINS[2]:
 				strike[0].style.width = '450px'
-				strike[0].style.marginTop = '16%'
+				strike[0].style.marginTop = '31vh'
 				strike[0].style.opacity = 1
 			break;
 			case POSSIBLE_WINS[3]:
 				strike[0].style.transform = 'rotate(90deg)'
 				strike[0].style.width = '450px'
-				strike[0].style.marginLeft = '-16%'
+				strike[0].style.marginLeft = '-31vh'
 				strike[0].style.opacity = 1
 			break;
 			case POSSIBLE_WINS[4]:
@@ -66,7 +64,7 @@ function handleClick(e) {
 			case POSSIBLE_WINS[5]:
 				strike[0].style.transform = 'rotate(90deg)'
 				strike[0].style.width = '450px'
-				strike[0].style.marginLeft = '16%'
+				strike[0].style.marginLeft = '31vh'
 				strike[0].style.opacity = 1
 			break;
 			case POSSIBLE_WINS[6]:
